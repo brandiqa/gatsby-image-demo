@@ -22,30 +22,28 @@ const GradoPage = ({data}) => (
 
 export default GradoPage
 
+export const fluidImage = graphql`
+  fragment fluidImage on File {
+    childImageSharp {
+      fluid(maxWidth: 1000) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+`;
+
 export const pageQuery = graphql`
   query {
     grado: file(relativePath: { eq: "grado-rs2e.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1000) {
-          ...GatsbyImageSharpFluid
-        }
-      }
+       ...fluidImage
     }
 
     gradoBox: file(relativePath: { eq: "grado-rs2e-box.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1000) {
-          ...GatsbyImageSharpFluid
-        }
-      }
+       ...fluidImage
     }
 
     gradoMounted: file(relativePath: { eq: "grado-rs2e-mounted.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1000) {
-          ...GatsbyImageSharpFluid
-        }
-      }
+       ...fluidImage
     }
   }
 `
